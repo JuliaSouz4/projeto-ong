@@ -1,0 +1,277 @@
+/* ==========================================
+   1. AS TINTAS DO ARMAZÉM (Design System)
+========================================== */
+:root {
+    /* A sua paleta de Conto de Fadas */
+    --cor-primaria: #6718e6; /* Roxo místico */
+    --cor-secundaria: #d4af37; /* Dourado clássico */
+    --cor-fundo: #f8f1e3; /* Off-white (pergaminho) */
+    --cor-texto: #290663; /* Roxo/Preto para leitura suave */
+    
+    /* Espaçamentos padronizados */
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+}
+
+/* ==========================================
+   2. PREPARANDO O TERRENO (Reset)
+========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: sans-serif;
+}
+
+/* ==========================================
+   3. O CHÃO DO ARMAZÉM (Grid de 12 Colunas)
+========================================== */
+.meu-grid {
+    display: grid;
+    /* Aqui nós pintamos as 12 faixas (colunas) no chão: */
+    grid-template-columns: repeat(12, 1fr); 
+    gap: var(--space-md); /* Espaço entre as caixas */
+    padding: var(--space-md);
+}
+
+/* Como uma caixa (projeto da ONG) se comporta por padrão */
+.caixa-projeto {
+    /* No celular (tela pequena), a caixa ocupa as 12 colunas inteiras! */
+    grid-column: span 12; 
+    
+    /* Estética mágica da caixa */
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo);
+    padding: var(--space-lg);
+    border-radius: 8px;
+    border: 2px solid var(--cor-secundaria);
+}
+
+/* ==========================================
+   4. A FROTA DE VEÍCULOS (Breakpoints @media)
+========================================== */
+
+/* VEÍCULO 2: Celulares deitados (480px) */
+@media (min-width: 480px) {
+    .meu-grid {
+        padding: var(--space-lg); /* Dá mais espaço para respirar */
+    }
+}
+
+/* VEÍCULO 3: Tablets (768px) */
+@media (min-width: 768px) {
+    .caixa-projeto {
+        /* A tela cresceu! Agora dividimos 12 por 2 = 6 colunas para cada caixa */
+        grid-column: span 6; 
+    }
+}
+
+/* VEÍCULO 4: Desktops/Monitores (1024px) */
+@media (min-width: 1024px) {
+    .caixa-projeto {
+        /* Tela grande! Dividimos 12 por 3 = 4 colunas para cada caixa */
+        grid-column: span 4; 
+    }
+}
+
+/* VEÍCULO 5: Telas Panorâmicas de TV (1440px) */
+@media (min-width: 1440px) {
+    .meu-grid {
+        max-width: 1400px;
+        margin: 0 auto; /* Centraliza tudo para não esticar demais */
+    }
+}
+/* ==========================================
+   5. O TAPETE ROLANTE (Flexbox no Menu)
+========================================== */
+/* ==========================================
+   5. O MENU DESDOBRÁVEL (Hambúrguer & Responsivo)
+========================================== */
+.cabecalho-menu {
+    background-color: var(--cor-primaria); /* O nosso Roxo Místico */
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 3px solid var(--cor-secundaria); /* Linha dourada */
+}
+
+/* Esconde a caixinha de seleção quadrada padrão */
+.menu-checkbox {
+    display: none;
+}
+
+/* Estilo do botão de 3 riscas (Hambúrguer) */
+.menu-hamburguer {
+    font-size: 2rem;
+    color: var(--cor-secundaria); /* Dourado */
+    cursor: pointer;
+    display: block; /* Fica visível no telemóvel */
+    float: right;
+    margin-top: -35px; /* Alinha com o título no mobile */
+}
+
+/* Esconde a lista de links no telemóvel (a porta é estreita!) */
+.navegacao-links {
+    display: none; 
+    width: 100%;
+    text-align: center;
+    list-style: none; /* Tira as bolinhas */
+    padding-top: var(--space-md);
+}
+
+.navegacao-links a {
+    text-decoration: none;
+    color: var(--cor-fundo);
+    font-weight: bold;
+    padding: var(--space-sm);
+    display: block; /* Coloca um link em cada linha no mobile */
+}
+
+/* A MAGIA: Quando o utilizador "checa" a caixa clicando no ☰, a lista aparece! */
+.menu-checkbox:checked ~ .navegacao-links {
+    display: flex;
+    flex-direction: column; /* Empilha os links */
+}
+
+/* VEÍCULO MAIOR: Tablets e Desktops (Ecrãs grandes) */
+@media (min-width: 768px) {
+    .cabecalho-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-hamburguer {
+        display: none; /* Não precisamos do botão ☰ no computador */
+    }
+
+    .navegacao-links {
+        display: flex; /* Mostra a lista! */
+        flex-direction: row; /* Coloca um ao lado do outro */
+        width: auto;
+        padding-top: 0;
+    }
+}
+/* ==========================================
+   6. A PRATELEIRA INTELIGENTE (Flex Wrap)
+========================================== */
+.vitrine-projetos {
+    display: flex;
+    flex-wrap: wrap; /* O comando que empurra a caixa para a linha de baixo */
+    justify-content: center; /* Mantém os cartões centralizados no ecrã */
+    gap: var(--space-lg); /* Dá um respiro dourado entre as caixas */
+    padding: var(--space-lg);
+}/* ==========================================
+   7. INTERATIVIDADE E SENSORES (Botões e Formulários)
+========================================== */
+
+/* O Botão Padrão */
+.botao-magico {
+    background-color: var(--cor-secundaria); /* Dourado */
+    color: var(--cor-texto); /* Texto escuro para dar leitura */
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    /* A magia que faz a cor mudar devagarinho, e não de repente: */
+    transition: all 0.3s ease; 
+}
+
+/* O sensor de movimento (Passar o rato) */
+.botao-magico:hover {
+    background-color: #aa8421; /* Um dourado um pouco mais escuro */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para parecer que flutua */
+}
+
+/* O clique físico */
+.botao-magico:active {
+    box-shadow: none; /* Tira a sombra */
+    transform: translateY(2px); /* Empurra o botão 2 pixels para baixo */
+}
+
+/* Para quem navega sem rato (Acessibilidade) */
+.botao-magico:focus {
+    outline: 3px solid var(--cor-primaria); /* Borda roxa forte */
+    outline-offset: 3px; /* Descola a borda do botão */
+}
+
+/* O botão quebrado/bloqueado */
+.botao-magico:disabled {
+    background-color: var(--cor-texto-secundario); /* Fica cinza */
+    opacity: 0.5; /* Fica meio transparente */
+    cursor: not-allowed; /* O rato ganha aquele símbolo de 'proibido' */
+}
+
+/* ==========================================
+   8. CAMPOS DE FORMULÁRIO (Feedback visual)
+========================================== */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--cor-texto-secundario);
+    border-radius: 4px;
+    background-color: var(--cor-fundo); /* Cor de pergaminho */
+    color: var(--cor-texto);
+    transition: border-color 0.3s ease;
+}
+
+/* Quando o utilizador está a escrever na caixa */
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--cor-primaria); /* A borda fica roxa para destacar */
+}
+
+/* Validação: Digitou tudo certo! (Ex: email com @) */
+input:valid:not(:placeholder-shown) {
+    border-color: #2e7d32; /* Borda verde */
+}
+
+/* Validação: Digitou errado! (Ex: CPF com letras) */
+input:invalid:not(:placeholder-shown) {
+    border-color: #c62828; /* Borda vermelha */
+}/* ==========================================
+   9. COMPONENTES DE FEEDBACK (Alertas e Modais)
+========================================== */
+
+/* O Crachá (Badge) de etiqueta */
+.cracha-magico {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* O Alerta (Toast) de Sucesso */
+.alerta-sucesso {
+    background-color: #e6f4ea; /* Fundo verdinho claro */
+    border-left: 6px solid #2e7d32; /* Borda verde escura */
+    color: #2e7d32;
+    padding: 16px;
+    border-radius: 4px;
+    margin: 20px 0;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* O Modal (A prancheta que bloqueia o fundo) */
+.modal-simulado {
+    background-color: var(--cor-primaria); /* Fundo roxo místico */
+    color: var(--cor-fundo);
+    padding: 30px;
+    border: 3px solid var(--cor-secundaria); /* Borda dourada */
+    border-radius: 8px;
+    margin: 30px auto;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(42, 27, 66, 0.5);
+}
