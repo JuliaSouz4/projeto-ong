@@ -274,4 +274,32 @@ input:invalid:not(:placeholder-shown) {
     max-width: 400px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(42, 27, 66, 0.5);
+}/* ==========================================================================
+   ACESSIBILIDADE E MODOS DE ECRÃ (WCAG 2.1)
+   ========================================================================== */
+
+/* 1. Tinta fluorescente para quem navega por teclado (Foco visível) */
+a:focus, button:focus, input:focus {
+    outline: 3px solid #0056b3; /* Cor de alto contraste */
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* 2. Adaptação automática para Modo Escuro (Dark Mode) */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #E0E0E0;
+    }
+
+    /* Ajuste de contraste para contentores e formulários no modo escuro */
+    header, footer, fieldset {
+        background-color: #1e1e1e;
+        border-color: #333333;
+    }
+
+    /* Garantir que os textos dos cabeçalhos se mantêm legíveis */
+    h1, h2, legend {
+        color: #ffffff !important; 
+    }
 }
